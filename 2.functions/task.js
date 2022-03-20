@@ -6,10 +6,14 @@ function getArrayParams(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     sum = sum + arr[i];
+    if(arr[i] > max) {
+      max = arr[i];
+    }
+    if(arr[i] < min) {
+      min = arr[i];
+    }
   }
 
-  min = Math.min(...arr);
-  max = Math.max(...arr);
 
   let avg = parseFloat((sum / arr.length).toFixed(2));
 
@@ -38,7 +42,6 @@ function makeWork(arrOfArr, func) {
 
 // Задание 3
 function worker2(arr) {
-  let min = Math.min(...arr);
-  let max = Math.max(...arr);
-  return Math.abs(max - min);
+  let arrayParams = getArrayParams(arr);
+  return Math.abs(arrayParams.max - arrayParams.min);
 }
