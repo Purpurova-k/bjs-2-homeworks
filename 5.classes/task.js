@@ -178,6 +178,7 @@ class PrintEditionItem {
       let subject = this.subjects.find(item => item.subjectName === subjectName);
       if (subject === undefined) {
         console.log("Несуществующий предмет");
+        return;
       }
       let avgSubject = subject.marks.reduce((a, b) => (a + b) / subject.marks.length);
       console.log(`Средний балл по предмету ${subject.subjectName} ${avgSubject}`);
