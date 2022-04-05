@@ -179,15 +179,17 @@ class PrintEditionItem {
       if (subject === undefined) {
         console.log("Несуществующий предмет");
       }
-      let avgSubject = subject.marks.reduce((a, b) => { return (a + b) / subject.marks.length });
+      let avgSubject = subject.marks.reduce((a, b) => (a + b) / subject.marks.length);
       console.log(`Средний балл по предмету ${subject.subjectName} ${avgSubject}`);
+      return avgSubject;
     }
   
     getAverage() {
-      let avgAllSubjectsArr = this.subjects.map(item => item.marks.reduce((a, b) => (a + b)));
+      let sumOfMarksAllSubjectsArr = this.subjects.map(item => item.marks.reduce((a, b) => (a + b)));
       let amountOfMarks = this.subjects.reduce((acc, item, idx, arr) => { return acc + item.marks.length }, 0);
-      let avg = avgAllSubjectsArr.reduce((a, b) => { return (a + b) / amountOfMarks });
+      let avg = sumOfMarksAllSubjectsArr.reduce((a, b) => (a + b) / amountOfMarks);
       console.log(`Средний балл по всем предметам ${avg}`);
+      return avg;
     }
   
   
@@ -200,19 +202,19 @@ class PrintEditionItem {
   // Проверки
   const student = new Student("Олег Никифоров");
   
-  student.addMark(5, "algebra");
-  student.addMark(5, "algebra");
-  student.addMark(5, "geometry");
-  student.addMark(4, "geometry");
+  // student.addMark(5, "algebra");
+  // student.addMark(5, "algebra");
+  // student.addMark(5, "geometry");
+  // student.addMark(4, "geometry");
   
-  student.getAverageBySubject("geometry"); // Средний балл по предмету geometry 4.5
+  // student.getAverageBySubject("geometry"); // Средний балл по предмету geometry 4.5
   
-  student.getAverageBySubject("biology"); // Несуществующий предмет
+  // student.getAverageBySubject("biology"); // Несуществующий предмет
 
-  student.getAverage(); // Средний балл по всем предметам 4.75
+  // student.getAverage(); // Средний балл по всем предметам 4.75
 
-  student.exclude("Исключен за попытку подделать оценки");
-  console.log(student);
+  // student.exclude("Исключен за попытку подделать оценки");
+  // console.log(student);
 
 
 // // Средняя оценка по algebra
@@ -220,12 +222,12 @@ class PrintEditionItem {
 // student.addMark(5, "algebra");
 // student.getAverageBySubject("algebra");
 
-// // Средняя оценка по всем предметам
-// student.addMark(3, "algebra");
-// student.addMark(5, "algebra");
-// student.addMark(5, "history");
-// student.addMark(5, "history");
-// student.getAverage();
+// Средняя оценка по всем предметам
+student.addMark(3, "algebra");
+student.addMark(5, "algebra");
+student.addMark(5, "history");
+student.addMark(5, "history");
+student.getAverage();
 
   
   
