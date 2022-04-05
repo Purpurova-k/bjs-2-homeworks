@@ -179,14 +179,14 @@ class PrintEditionItem {
       if (subject === undefined) {
         console.log("Несуществующий предмет");
       }
-      let avgSubject = subject.marks.reduce((a, b) => (a + b) / subject.marks.length);
+      let avgSubject = subject.marks.reduce((a, b) => { return (a + b) / subject.marks.length });
       console.log(`Средний балл по предмету ${subject.subjectName} ${avgSubject}`);
     }
   
     getAverage() {
       let avgAllSubjectsArr = this.subjects.map(item => item.marks.reduce((a, b) => (a + b)));
       let amountOfMarks = this.subjects.reduce((acc, item, idx, arr) => { return acc + item.marks.length }, 0);
-      let avg = avgAllSubjectsArr.reduce((a, b) => (a + b) / amountOfMarks);
+      let avg = avgAllSubjectsArr.reduce((a, b) => { return (a + b) / amountOfMarks });
       console.log(`Средний балл по всем предметам ${avg}`);
     }
   
