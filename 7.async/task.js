@@ -40,14 +40,14 @@ class AlarmClock {
             if(this.getCurrentFormattedTime() === clock.time) {
                 clock.func();
             }
+        }
 
             if(!this.timerId) {
                 this.timerId = setInterval(() => {
                     this.alarmCollection.forEach(checkClock);
-                });
+                }, 1000);
             }
         }
-    }
 
     stop() {
         if(this.timerId) {
