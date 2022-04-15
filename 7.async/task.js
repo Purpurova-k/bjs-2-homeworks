@@ -31,8 +31,8 @@ class AlarmClock {
         return false;
     }
 
-    getCurrentFormattedTime() {
-        return new Date().toLocaleTimeString("ru-Ru", { hour: "2-digit", minute: "2-digit" });
+    getCurrentFormattedTime(addMinutes = 0) {
+        return new Date(new Date().getTime() + addMinutes * 60000).toLocaleTimeString("ru-Ru", { hour: "2-digit", minute: "2-digit" });
     }
 
     start() {
@@ -71,21 +71,14 @@ function testCase() {
     let alarm = new AlarmClock();
     alarm.addClock(alarm.getCurrentFormattedTime(), () => console.log("Пора вставать"), 1);
 
-
-    let newDate = new Date();
-    let hours = newDate.getHours();
-    let minutes = newDate.getMinutes() + 1;
-    let currentDatePlusOneMinute = `${hours}:${minutes}`;
+    let currentDatePlusOneMinute = alarm.getCurrentFormattedTime(1);
 
     alarm.addClock(currentDatePlusOneMinute, () => {
         console.log("Давай, вставай уже!");
         alarm.removeClock(2);
     }, 2);
 
-    newDate = new Date();
-    hours = newDate.getHours();
-    minutes = newDate.getMinutes() + 2;
-    let currentDatePlusTwoMinutes = `${hours}:${minutes}`;
+    let currentDatePlusTwoMinutes = alarm.getCurrentFormattedTime(2);
 
     alarm.addClock(currentDatePlusTwoMinutes, () => {
         console.log("Вставай, а то проспишь!");
