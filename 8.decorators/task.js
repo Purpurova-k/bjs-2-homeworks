@@ -28,52 +28,45 @@ function cachingDecoratorNew(func) {
 
 
 function debounceDecoratorNew(func, ms) {
-  let flag = false,
-      savedArgs,
-      savedThis;
+  let flag = false;
+  let timeout;
 
   return function(...args) {
-    savedArgs = args;
-    savedThis = this;
 
-    if(flag) {
-      return;
+    if(!flag) {
+      func.apply(this, args);
+      flag = true;
     }
 
-    func.apply(this, savedArgs);
-    flag = true;
+    clearTimeout(timeout);
 
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       flag = false;
-      func.apply(savedThis, savedArgs)
+      func.apply(this, args)
     }, ms);
   }
 }
 
 
 function debounceDecorator2(func) {
-  let flag = false,
-      savedArgs,
-      savedThis;
+  let flag = false;
+  let timeout;
   
   wrapper.count = 0;
 
   function wrapper(...args) {
     wrapper.count ++;
 
-    savedArgs = args;
-    savedThis = this;
-
-    if(flag) {
-      return;
+    if(!flag) {
+      func.apply(this, args);
+      flag = true;
     }
 
-    func.apply(this, savedArgs);
-    flag = true;
-
-    setTimeout(() => {
+    clearTimeout(timeout);
+    
+    timeout = setTimeout(() => {
       flag = false;
-      func.apply(savedThis, savedArgs)
+      func.apply(this, args)
     }, ms);
   }
   return wrapper;
